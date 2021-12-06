@@ -7,9 +7,9 @@ import {
 } from "@expo-google-fonts/poppins";
 import AppLoading from "expo-app-loading";
 
-import { Register } from "./src/screens/Register";
 import theme from "./src/global/styles/theme";
 import { useFonts } from "expo-font";
+import { CategorySelect } from "./src/screens/CategorySelect/Index";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,7 +22,7 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Register />
+      <CategorySelect />
     </ThemeProvider>
   );
 }
