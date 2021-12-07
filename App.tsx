@@ -9,7 +9,7 @@ import AppLoading from "expo-app-loading";
 
 import theme from "./src/global/styles/theme";
 import { useFonts } from "expo-font";
-import { CategorySelect } from "./src/screens/CategorySelect/Index";
+import { Register } from "./src/screens/Register";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,7 +22,7 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <CategorySelect />
+      <Register />
     </ThemeProvider>
   );
 }
