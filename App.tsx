@@ -5,11 +5,13 @@ import {
   Poppins_500Medium,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
+
+import { NavigationContainer } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
 
 import theme from "./src/global/styles/theme";
 import { useFonts } from "expo-font";
-import { Register } from "./src/screens/Register";
+import { AppRoutes } from "./src/routes/app.routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,7 +24,9 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Register />
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
