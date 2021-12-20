@@ -8,6 +8,7 @@ import {
   Poppins_500Medium,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
+import { SignIn } from "./src/screens/SignIn";
 
 import { NavigationContainer } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
@@ -29,7 +30,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <StatusBar barStyle="light-content" />
-        <AppRoutes />
+        <SignIn />
       </NavigationContainer>
     </ThemeProvider>
   );
