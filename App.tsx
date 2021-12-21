@@ -2,6 +2,8 @@ import "intl";
 import "intl/locale-data/jsonp/pt-BR";
 import React from "react";
 import { StatusBar } from "react-native";
+import { AuthProvider } from "./src/hooks/Auth";
+
 import { ThemeProvider } from "styled-components/native";
 import {
   Poppins_400Regular,
@@ -30,7 +32,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <StatusBar barStyle="light-content" />
-        <SignIn />
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>
       </NavigationContainer>
     </ThemeProvider>
   );
