@@ -22,6 +22,9 @@ interface AuthorizationResponse {
   type: string;
 }
 
+const { CLIENT_ID } = process.env;
+const { REDIRECT_URI } = process.env;
+
 const AuthContext = createContext({} as IAuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
@@ -29,9 +32,6 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signInWithGoogle() {
     try {
-      const CLIENT_ID =
-        "1001878357559-c4s1iaog8cf8b08ah7v58ad3bnlocf27.apps.googleusercontent.com";
-      const REDIRECT_URI = "https://auth.expo.io/@ca-byte/gofinances";
       const RESPONSE_TYPE = "token";
       const SCOPE = encodeURI("profile email");
 
