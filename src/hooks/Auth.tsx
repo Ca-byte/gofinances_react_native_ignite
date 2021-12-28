@@ -1,5 +1,7 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
 import * as AuthSession from "expo-auth-session";
+import * as AppleAuthentication from "expo-apple-authentication";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -10,9 +12,10 @@ interface User {
   email: string;
   photo?: string;
 }
-interface IAuthContextData {
+interface AuthContextData {
   user: User;
   signInWithGoogle(): Promise<void>;
+  signInWithApple(): Promise<void>;
 }
 
 interface AuthorizationResponse {
@@ -25,7 +28,7 @@ interface AuthorizationResponse {
 const { CLIENT_ID } = process.env;
 const { REDIRECT_URI } = process.env;
 
-const AuthContext = createContext({} as IAuthContextData);
+const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>({} as User);
@@ -51,6 +54,35 @@ function AuthProvider({ children }: AuthProviderProps) {
           name: userInfo.given_name,
           photo: userInfo.picture,
         });
+        await AsyncStorage.setItem(
+          "@gofinances:tansactions",
+          JSON.stringify(userInfo)
+        );
+      }
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  }
+  async function signInWithApple() {
+    try {
+      const credencial = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      if (credencial) {
+        const userLogged = {
+          id: String(credencial.user),
+          email: credencial.email!,
+          name: credencial.fullName!.givenName!,
+          photo: undefined,
+        };
+        setUser(userLogged);
+        await AsyncStorage.setItem(
+          "@gofinances:tansactions",
+          JSON.stringify(userLogged)
+        );
       }
     } catch (error) {
       throw new Error(error as string);
@@ -58,7 +90,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle, signInWithApple }}>
       {children}
     </AuthContext.Provider>
   );
