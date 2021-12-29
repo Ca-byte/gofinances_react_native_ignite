@@ -5,10 +5,10 @@ import { AppRoutes } from "./app.routes";
 import { useAuth } from "../hooks/Auth";
 
 export function Routes() {
-  const User = useAuth();
+  const { user } = useAuth();
   return (
     <NavigationContainer>
-      {User ? <AppRoutes /> : <AuthRoutes />}
+      {user ? <AppRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 }
