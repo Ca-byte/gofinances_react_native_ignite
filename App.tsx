@@ -2,7 +2,7 @@ import "intl";
 import "intl/locale-data/jsonp/pt-BR";
 import React from "react";
 import { StatusBar } from "react-native";
-import { AuthProvider } from "./src/hooks/Auth";
+import { AuthProvider, useAuth } from "./src/hooks/Auth";
 
 import { ThemeProvider } from "styled-components/native";
 import {
@@ -16,7 +16,6 @@ import AppLoading from "expo-app-loading";
 
 import theme from "./src/global/styles/theme";
 import { useFonts } from "expo-font";
-import { AppRoutes } from "./src/routes/app.routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,7 +23,10 @@ export default function App() {
     Poppins_500Medium,
     Poppins_700Bold,
   });
-  if (!fontsLoaded) {
+
+  const { userStorageLoading } = useAuth();
+
+  if (!fontsLoaded || userStorageLoading) {
     return <AppLoading />;
   }
   return (

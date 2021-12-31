@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components";
+import { useAuth } from "../../hooks/Auth";
+
 import { ActivityIndicator } from "react-native";
 import { HighlightCard } from "../../components/HighlightCard";
 import {
@@ -50,6 +53,7 @@ export function Dashboard() {
   );
 
   const theme = useTheme();
+  const { signOut, user } = useAuth();
 
   function getLastTransactionDate(
     collection: DataListProps[],
@@ -69,9 +73,9 @@ export function Dashboard() {
       { month: "long" }
     )}`;
   }
+  const dataKey = "@gofinances:transactions";
 
   async function loadTransaction() {
-    const dataKey = "@gofinances:tansactions";
     const response = await AsyncStorage.getItem(dataKey);
     const transactions = response ? JSON.parse(response) : [];
 
@@ -107,7 +111,6 @@ export function Dashboard() {
         };
       }
     );
-
     setTransactions(transactiondFormatted);
 
     const lastTransactionEntries = getLastTransactionDate(
@@ -146,10 +149,6 @@ export function Dashboard() {
     });
     setIsLoading(false);
   }
-  useEffect(() => {
-    loadTransaction();
-  }, []);
-
   useFocusEffect(
     useCallback(() => {
       loadTransaction();
@@ -166,14 +165,14 @@ export function Dashboard() {
           <Header>
             <UserWrapper>
               <UserInfo>
-                <Photo source={{ uri: "https://github.com/Ca-byte.png" }} />
+                <Photo source={{ uri: user.photo }} />
 
                 <User>
                   <UserGreetings>Ola,</UserGreetings>
-                  <UserName>Caroline</UserName>
+                  <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
-              <LogoutButton onPress={() => {}}>
+              <LogoutButton onPress={signOut}>
                 <Icon name="power" />
               </LogoutButton>
             </UserWrapper>
