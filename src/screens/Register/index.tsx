@@ -3,6 +3,7 @@ import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 
 import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/Auth";
 
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -50,6 +51,7 @@ export function Register() {
   });
 
   const navigation = useNavigation<NavigationProps>();
+  const { user } = useAuth();
 
   const {
     control,
@@ -87,7 +89,7 @@ export function Register() {
     };
 
     try {
-      const dataKey = "@gofinances:transactions";
+      const dataKey = `@gofinances:transactions_user:${user.id}`;
       const data = await AsyncStorage.getItem(dataKey);
 
       const currentData = data ? JSON.parse(data) : [];
