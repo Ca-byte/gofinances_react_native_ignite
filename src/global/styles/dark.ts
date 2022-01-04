@@ -1,5 +1,5 @@
 export default {
-  title: "light",
+  title: "dark",
   colors: {
     primary: "#5636D3",
 
@@ -14,9 +14,9 @@ export default {
 
     shape: "#FFFFFF",
     title: "#363F5F",
-    text: "#515158",
+    text: "#fff",
     text_dark: "#000000",
-    background: "#F0F2F5",
+    background: "#0D0D0D",
   },
   fonts: {
     regular: "Poppins_400Regular",

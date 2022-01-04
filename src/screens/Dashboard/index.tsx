@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 import { useAuth } from "../../hooks/Auth";
 
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Switch } from "react-native";
 import { HighlightCard } from "../../components/HighlightCard";
 import {
   TransactionCard,
@@ -46,6 +46,7 @@ interface HighlightData {
 }
 
 export function Dashboard() {
+  const [mode, setMode] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>([]);
   const [highlightData, setHighlightData] = useState<HighlightData>(
@@ -189,6 +190,16 @@ export function Dashboard() {
                   <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
+              <Switch
+                value={mode}
+                trackColor={{ false: "#767577", true: theme.colors.shape }}
+                thumbColor={
+                  mode ? theme.colors.primary : theme.colors.secondary
+                }
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={() => setMode((mode) => !mode)}
+              />
+
               <LogoutButton onPress={signOut}>
                 <Icon name="power" />
               </LogoutButton>
