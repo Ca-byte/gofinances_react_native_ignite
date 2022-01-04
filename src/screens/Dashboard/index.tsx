@@ -53,7 +53,10 @@ export function Dashboard() {
     {} as HighlightData
   );
 
+  const toggleSwitch = () => setMode((previousState) => !previousState);
+
   const theme = useTheme();
+
   const { signOut, user } = useAuth();
 
   function getLastTransactionDate(
@@ -197,7 +200,7 @@ export function Dashboard() {
                   mode ? theme.colors.primary : theme.colors.secondary
                 }
                 ios_backgroundColor="#3e3e3e"
-                onValueChange={() => setMode((mode) => !mode)}
+                onValueChange={toggleSwitch}
               />
 
               <LogoutButton onPress={signOut}>
