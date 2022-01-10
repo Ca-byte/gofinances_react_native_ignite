@@ -1,5 +1,6 @@
-# gofinances
-Controle suas finanças de forma muito mais simples!
+<p align="center">
+  <img src="https://github.com/Ca-byte/gofinances_react_native_ignite/blob/main/logo.png" width="" >
+</p>
 
 ## 📋 Índice
 
@@ -11,6 +12,30 @@ Controle suas finanças de forma muito mais simples!
 ---
 
 ## 🖥 Preview 
+
+<p align="center">
+  <img src="" width="" >
+</p>
+
+<p align="center">
+  <img src="" width="" >
+</p>
+
+<p align="center">
+  <img src="" width="" >
+</p>
+
+<p align="center">
+  <img src="" width="" >
+</p>
+
+<p align="center">
+  <img src="" width="" >
+</p>
+
+<p align="center">
+  <img src="" width="" >
+</p>
 
 <p align="center">
   <img src="" width="" >
