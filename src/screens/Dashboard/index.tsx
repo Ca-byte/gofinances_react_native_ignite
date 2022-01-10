@@ -29,6 +29,7 @@ import {
   LogoutButton,
   LoadContainer,
 } from "./styles";
+import dark from "../../global/styles/dark";
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -46,14 +47,14 @@ interface HighlightData {
 }
 
 export function Dashboard() {
-  const [mode, setMode] = useState(true);
+  const [mode, setMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>([]);
   const [highlightData, setHighlightData] = useState<HighlightData>(
     {} as HighlightData
   );
 
-  const toggleSwitch = () => setMode((previousState) => !previousState);
+  const toggleSwitch = () => {};
 
   const theme = useTheme();
 
@@ -195,7 +196,10 @@ export function Dashboard() {
               </UserInfo>
               <Switch
                 value={mode}
-                trackColor={{ false: "#767577", true: theme.colors.shape }}
+                trackColor={{
+                  false: dark.colors.toggleDark,
+                  true: theme.colors.shape,
+                }}
                 thumbColor={
                   mode ? theme.colors.primary : theme.colors.secondary
                 }
