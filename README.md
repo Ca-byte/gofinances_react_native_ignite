@@ -73,7 +73,7 @@ yarn
 expo start
 ```
 
-Feito isso, abrirá no seu navegador uma aba e você escolhe abrir com o simulador ou seu aparelho fisíco
+Feito isso, abrirá no seu navegador uma aba e você escolhe abrir com o simulador e/ou seu aparelho fisíco 😉
 
 ---
 
